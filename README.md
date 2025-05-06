@@ -3,6 +3,8 @@ Development of algo for Load cell for Horizontal Propulsion Test and get plot of
 
 ```mermaid
 flowchart TD
+    LIP[project Workflow] -->B
+    LIP[project Workflow] -->A
     B[LoadCell & HX711] --> C(ESP32 & Ard IDE)
     A[BreadB & GPI0] --> C
     C --> D[Serial Monitor verification]
@@ -14,6 +16,7 @@ flowchart TD
     G --> I
     H --> I
     I --> J(Gen .csv for later analysis)
+LIP@{ shape: lin-proc}
 
     LP[ Load Plate / Motor Mount ] --> |Applies Force|AF[ Load Cell ]
      AF -->|Converts force to small analog voltage|HX[HX711 Amplifier]
