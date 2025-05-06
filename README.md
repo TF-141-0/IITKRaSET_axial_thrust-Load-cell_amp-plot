@@ -2,8 +2,9 @@ Development of algo for Load cell for Horizontal Propulsion Test and get plot of
 
 ```mermaid
 flowchart TD
-    A[Start] --> B[Step 1]
-    B --> C{Decision?}
+    A[BreadB & GPI0] B[LoadC &  HX711]
+    B --> C(ESP32-Ard IDE)
+    A --> C
     C -- Yes --> D[Do this]
     C -- No --> E[Do that]
     D --> F[End]
