@@ -1,6 +1,7 @@
-
 ```mermaid
 flowchart TD
+    LIP[Project Workflow] -->A
+    LIP[Project Workflow] -->B
     B[LoadCell & HX711] --> C(ESP32 & Ard IDE)
     A[BreadB & GPI0] --> C
     C --> D[Serial Monitor verification]
@@ -11,5 +12,4 @@ flowchart TD
     F --> I(Array logging time/force)
     G --> I
     H --> I
-   
-  ```
+    I --> J(Gen .csv for later analysis)
