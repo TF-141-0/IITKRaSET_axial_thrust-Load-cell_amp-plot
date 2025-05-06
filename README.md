@@ -13,5 +13,6 @@ flowchart TD
     F --> I(Array logging time/force)
     G --> I
     H --> I
+    I --> J(Gen .csv for later analysis)
    
   ```
