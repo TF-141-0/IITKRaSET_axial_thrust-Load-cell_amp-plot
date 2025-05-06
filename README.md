@@ -1,1 +1,1 @@
-# IITKRaSET_axial_thrust-Load-cell_amp-plot
+Development of algo for Load cell for Horizontal Propulsion Test and get plot of axial Thrust 
