@@ -3,8 +3,8 @@ Development of algo for Load cell for Horizontal Propulsion Test and get plot of
 
 ```mermaid
 flowchart TD
-    LIP[project Workflow] -->B
-    LIP[project Workflow] -->A
+    LIP[Project Workflow] -->A
+    LIP[Project Workflow] -->B
     B[LoadCell & HX711] --> C(ESP32 & Ard IDE)
     A[BreadB & GPI0] --> C
     C --> D[Serial Monitor verification]
