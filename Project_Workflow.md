@@ -9,7 +9,7 @@ flowchart TD
     E --> F[serialport/FXN/MATLAB R2019b+]
     E --> G[Set COM port, baud rate]
     E --> H[Read data in loop]
-    F,G,H --> I(Array logging time[], force[])
+    F,G,H --> I(Array logging time/force)
     
    
   ```
