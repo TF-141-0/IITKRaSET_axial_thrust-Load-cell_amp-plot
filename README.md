@@ -5,4 +5,4 @@ flowchart TD
     A[BreadB & GPI0] B[LoadC &  HX711]
     B --> C(ESP32-Ard IDE)
     A --> C
-  
+  ```
