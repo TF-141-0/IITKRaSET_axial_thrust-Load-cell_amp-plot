@@ -3,7 +3,6 @@
 
 ```mermaid
 flowchart TD
-    LIP[Project Workflow] -->A
     LIP[Project Workflow] -->B
     B[LoadCell & HX711] --> C(ESP32 & Ard IDE)
     C --> D[Serial Monitor verification]
