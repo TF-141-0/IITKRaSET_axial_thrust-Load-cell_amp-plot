@@ -5,14 +5,11 @@
 flowchart TD
     LIP[Project Workflow] -->B
     B[LoadCell & HX711] --> C(ESP32 & Ard IDE)
-    C --> D[Serial Monitor verification]
-    D --> E(Read Serial Data in MATLAB)
-    E --> F[serialport/FXN/MATLAB R2019b+]
-    E --> G[Set COM port, baud rate]
-    E --> H[Read data in loop]
-    F --> I(Array logging time/force)
-    G --> I
-    H --> I
+    C --> D[Serial Monitor verification/Calibration]
+    D --> F[Establishing wireless UD/HTTP connection to microcontroller]
+    D --> G[Set COM port For SD card]
+    F --> I(Array logging on Matlab)
+    G --> H[Gen .csv/TXT for later analysis]
     I --> J(Gen .csv for later analysis)
 LIP@{ shape: lin-proc}
     LIP2[System execution] --> LP
