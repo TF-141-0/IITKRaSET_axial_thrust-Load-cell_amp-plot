@@ -7,7 +7,7 @@ flowchart TD
     B[LoadCell & HX711] --> C(ESP32 & Ard IDE)
     C --> D[Serial Monitor verification/Calibration]
     D --> F[Establishing wireless UD/HTTP connection to microcontroller]
-    D --> G[Set COM port For SD card]
+    D --> G[Initialize SD card via SPI]
     F --> I(Array logging on Matlab)
     G --> H[Gen .csv/TXT for later analysis]
     I --> J(Gen .csv for later analysis)
