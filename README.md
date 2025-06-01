@@ -1,4 +1,4 @@
-### Development of algo for Load cell for Horizontal Propulsion Test and get plot of axial Thrust 
+### Amplification and extraction of data for Load cell for Horizontal Propulsion Test
 
 
 ```mermaid
