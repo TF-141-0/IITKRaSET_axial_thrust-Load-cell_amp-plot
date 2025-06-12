@@ -1,42 +1,59 @@
-#include <HX711.h>
 #include <WiFi.h>
-#include <WifiUdp.h>
+#include <WiFiUdp.h>
+#include "HX711.h"
 
-const char* ssid = "";
-const char* password = "";
-const char* laptopIP = "";
-const int port = 6969;
 
-#define DOUT 
-#define CLK
+const char* ssid     = "GSS-2";
+const char* password = "esp32www";
 
-float cal_factor = ;
+const char* laptopIP = "192.168.137.1";
+const int port = 9500;  
 
-void setup()
-{
+WiFiUDP udp;
+
+#define DT 18
+#define SCK 19
+HX711 scale;
+
+float calibration_factor = 8.47;  
+
+void setup() {
+  // Serial for debug
   Serial.begin(115200);
-  scale.begin(DOUT, CLK);
+
+  scale.begin(DT, SCK);
   scale.set_scale(calibration_factor);
-  scale.tare();
+  scale.tare();  
 
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(1000);
-    Serial.print(".")
+  Serial.print("Connecting to Wi-Fi"); //Dbt
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
   }
-  Serial.println("WiFi connected!");
-  Serial.println(WiFi.localIP());
-}
-void loop() 
-{
-  float weight = scale.get_units(2);
-  char buffer[32];
-  snprintf(buffer, sizeof(buffer), "%.2f", weight); //decimal (weight) string(buffer) mai convert hora
-  
-  udp.beginPacket(laptopIP, port);
-  udp.print(buffer);
-  udp.endPacket();
 
-  delay(200);
+  Serial.println("\nWi-Fi connected.");
+  Serial.print("ESP32 IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.print("Sending to Laptop IP: ");
+  Serial.println(laptopIP);
+}
+
+void loop() {
+  if (scale.is_ready()) {
+    float wei = scale.get_units(2);
+    float Thrust = wei;
+    if (abs(Thrust) < 0.05) Thrust = 0; 
+
+    char buffer[32];
+    snprintf(buffer, sizeof(buffer), "%.2f", Thrust);
+    udp.beginPacket(laptopIP, port);
+    udp.print(buffer);
+    //Serial.println("Sending UDP...");
+    udp.endPacket();
+    //Serial.println(Thrust);
+  }
+
+  delay(200);  
+
 }
