@@ -8,9 +8,9 @@ flowchart TD
     C --> D[Serial Monitor verification/Calibration]
     D --> F[Establishing wireless UD/HTTP connection to microcontroller]
     D --> G[Initialize SD card via SPI]
-    F --> I(Array logging on Matlab)
+    J --> I(Array logging on Matlab)
     G --> H[Gen .csv/TXT for later analysis]
-    I --> J(Gen .csv for later analysis)
+    F --> J(Gen .csv for later analysis)
 LIP@{ shape: lin-proc}
     LIP2[System execution] --> LP
     LP[ Load Plate / Motor Mount ] --> |Applies Force|AF[ Load Cell ]
