@@ -1,24 +1,43 @@
 clc;
 clear;
 
-u = udpport("datagram", "LocalPort", 6969);
+u = udpport("datagram", "LocalPort", 9500);
+disp("Listening on UDP port 9500...");
+
+timestamps = [];
+weights = [];
+csvFile = "esp32_weight_log.csv";
+fid = fopen(csvFile, 'w');
+fprintf(fid, "Time,Weight\n");
 
 figure;
-h = animatedline;
-ax = gca;
-ax.YGrid = 'on';
+h = plot(NaN, NaN, 'b.-');
 xlabel('Time (s)');
-ylabel('Weight (kg)');
-title('Real-time Load Cell Data via UDP');
+ylabel('Force(N)');
+title('Live Weight Plot');
+grid on;
 
-tStart = tic;
+startTime = tic;
 
 while true
     if u.NumDatagramsAvailable > 0
-        data = readline(u);  % receive packet
+        data = read(u, 1, "string");  
+        display(data);
         weight = str2double(data);
-        t = toc(tStart);
-        addpoints(h, t, weight);
-        drawnow limitrate;
+
+        t = toc(startTime);    
+        
+        % Append data
+        timestamps(end+1) = t;
+        weights(end+1) = weight;
+        
+        % Update plot
+        set(h, 'XData', timestamps, 'YData', weights);
+        drawnow limitrate
+
+        % Write to CSV
+        fprintf(fid, "%.3f,%.2f\n", t, weight);
     end
+    pause(0.05); 
 end
+
