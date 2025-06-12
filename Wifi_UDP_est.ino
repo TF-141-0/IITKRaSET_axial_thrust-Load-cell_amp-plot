@@ -42,7 +42,7 @@ void setup() {
 void loop() {
   if (scale.is_ready()) {
     float wei = scale.get_units(2);
-    float Thrust = wei;
+    float Thrust = wei/10;
     if (abs(Thrust) < 0.05) Thrust = 0; 
 
     char buffer[32];
