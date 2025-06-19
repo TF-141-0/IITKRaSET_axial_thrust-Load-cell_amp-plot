@@ -1,3 +1,5 @@
+%turns out it has issues coverting data thats coming over UDP (unable to change back to integer[what we need for plots] in system it doesnt work with UDP data)
+
 clc;
 clear;
 
