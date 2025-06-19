@@ -18,7 +18,6 @@ HX711 scale;
 float calibration_factor = 8.47;  
 
 void setup() {
-  // Serial for debug
   Serial.begin(115200);
 
   scale.begin(DT, SCK);
@@ -39,21 +38,27 @@ void setup() {
   Serial.println(laptopIP);
 }
 
-void loop() {
-  if (scale.is_ready()) {
-    float wei = scale.get_units(2);
-    float Thrust = wei/100;
-    if (abs(Thrust) < 0.05) Thrust = 0; 
+void loop()
+{
+  static unsigned long last_time = 0;
+  unsigned long now = millis();
 
-    char buffer[32];
-    snprintf(buffer, sizeof(buffer), "%.2f", Thrust);
-    udp.beginPacket(laptopIP, port);
-    udp.print(buffer);
-    //Serial.println("Sending UDP...");
-    udp.endPacket();
-    //Serial.println(Thrust);
+  if (now - last_time >= 12) {  // every 12.5 ms
+    last_time = now;
+
+    if (scale.is_ready()) {
+      float wei = scale.get_units(1);  
+      float Thrust = wei / 100;
+      if (abs(Thrust) < 0.05) Thrust = 0;
+
+      char buffer[32];
+      snprintf(buffer, sizeof(buffer), "%.2f", Thrust);
+      udp.beginPacket(laptopIP, port);
+      udp.print(buffer);
+      udp.endPacket();
+
+      Serial.println(Thrust);
+    }
   }
-
-  delay(200);  
-
 }
+
