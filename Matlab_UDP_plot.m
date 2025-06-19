@@ -1,5 +1,5 @@
 %turns out it has issues coverting data thats coming over UDP (unable to change back to integer[what we need for plots] in system it doesnt work with UDP data)
-%Came up with another plan to do it by python though it has delays in live plotting after changing sampling to 92hz you can see that in Main page as Import_Socket )
+%Came up with another plan to do it by python though it has delays in live plotting after changing sampling to 92hz you can see that in Main page as Refer to [Import_Socket.py](./path/to/Import_Socket.py)
 
 clc;
 clear;
